@@ -26,6 +26,7 @@ while True:
 
 
     while liste != hedef:
+        os.system("cls" if os.name == "nt" else "clear")
         s = [x for x in liste if x != 0]
         count = 0
         for i in range(len(s)):
