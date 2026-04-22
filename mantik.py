@@ -32,7 +32,48 @@ def inversion(liste):
                 if s[i]>s[j]:
                     count=count+1
     return count                
+def manhattan(liste):
+    toplam=0
+    for i, val in enumerate(liste):
+        if val==0:
+            continue
+        hedef_index=val-1
+        suan_satir=i//3  #satiri veririr.
+        suan_sutun=i%3   #sütunu verir.
+        hedef_satir=hedef_index//3
+        hedef_sutun=hedef_index%3
+        toplam+=abs(hedef_satir - suan_satir) + abs(hedef_sutun - suan_sutun)
+    return toplam
 
+def en_kisa_yol(liste):
+    kuyruk = [(manhattan(liste), 0, tuple(liste))]
+    ziyaret = {}
+    
+    while kuyruk:
+        f, g, durum = heapq.heappop(kuyruk)
+        
+        if list(durum) == hedef:
+            return g
+        
+        if durum in ziyaret:
+            continue
+        ziyaret[durum] = g
+        
+        bos = durum.index(0)
+        satir, sutun = bos // 3, bos % 3
+        
+        for ds, dc in [(-1,0),(1,0),(0,-1),(0,1)]:
+            ys, yc = satir+ds, sutun+dc
+            if 0 <= ys < 3 and 0 <= yc < 3:
+                yi = ys*3+yc
+                lst = list(durum)
+                lst[bos], lst[yi] = lst[yi], lst[bos]
+                komsu = tuple(lst)
+                yeni_g = g + 1
+                yeni_f = yeni_g + manhattan(komsu)
+                heapq.heappush(kuyruk, (yeni_f, yeni_g, komsu))
+    
+    return None
 def hareket_ettirme(liste,tus):
     bos = liste.index(0)
     satir=bos//3
