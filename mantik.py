@@ -5,6 +5,8 @@
 
 
 import random
+import heapq
+import time
 
 hedef=[1,2,3,4,5,6,7,8,0]
 liste=[1,2,3,4,5,6,7,8,0]
