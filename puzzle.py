@@ -13,7 +13,6 @@ def gorsel_hazirla(yol):
         img = Image.open(yol)
         img = img.resize((300, 300))
         
-       
         parcalar = [None] * 9 
         genislik = 100
         
@@ -84,11 +83,11 @@ pencere.config(bg="#18182F")
 
 
 gorsel_parcalari = gorsel_hazirla("gorsel1.jpg")
-
-oyun_alani = tk.Frame(pencere, bg="#292054")
-oyun_alani.pack(pady=20)
 baslik_label = tk.Label(pencere, text="", font=("Segoe UI Black", 28, "bold"), bg="#1A1C29", fg="#F4D35E")
 baslik_label.pack(pady=10)
+oyun_alani = tk.Frame(pencere, bg="#292054")
+oyun_alani.pack(pady=20)
+
 
 hedef_metin = "SNAP 3X3"
 
@@ -102,7 +101,7 @@ def harf_harf_yaz(indeks=0):
 harf_harf_yaz()
 
 for i in range(9):
-    
+    # Buton boyutlarını baştan 100 olarak veriyoruz
     btn = tk.Button(oyun_alani, width=100, height=100, command=lambda x=i: hareket(x))
     btn.grid(row=i//3, column=i%3, padx=1, pady=1)
     butonlar.append(btn)
