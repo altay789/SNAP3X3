@@ -35,13 +35,13 @@ baslik_label.pack(pady=10)
 
 hedef_metin = "SNAP 3X3"
 
-def harf_harf_yaz(indeks=0):
+def harf_harf_yaz(indeks=0):#bura snap3X3 basligini yazdirn kisim
     if indeks < len(hedef_metin):
         mevcut = baslik_label.cget("text")
         baslik_label.config(text=mevcut + hedef_metin[indeks])
-        pencere.after(150, harf_harf_yaz, indeks + 1)
+        pencere.after(150, harf_harf_yaz, indeks + 1)#bu satirla birlikte harflar kayıyor.
 
-harf_harf_yaz()
+harf_harf_yaz()#rekürsif mantigi
 
 # --- OYUN ALANI ---
 oyun_alani = tk.Frame(pencere, bg="#292054")
@@ -60,12 +60,13 @@ def guncelle():
 
         if gorsel_parcalari:
             butonlar[i].config(image=gorsel_parcalari[val], text="")
-            butonlar[i].image = gorsel_parcalari[val]  # 🔥 ÖNEMLİ
+            butonlar[i].image = gorsel_parcalari[val]  #ÖNEMLİ
 
             if val == 0:
                 butonlar[i].config(state="disabled", bd=0)
             else:
-                butonlar[i].config(state="normal", bd=1)
+                renk = "#82E0AA" if val == hedef[i] else "#F1948A"
+                butonlar[i].config(state="normal", bd=1,bg=renk)
 
         else:
             butonlar[i].config(text=str(val) if val != 0 else "", font=("Arial", 18))
@@ -84,7 +85,7 @@ def hareket(i):
         if liste == hedef:
             sure = time.time() - baslangic_zamani
 
-            # 🔥 REKOR KONTROLÜ
+            #REKOR KONTROLÜ
             if rekor is None or hamle_sayisi < rekor:
                 rekor = hamle_sayisi
 
