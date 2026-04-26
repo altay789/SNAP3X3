@@ -35,7 +35,11 @@ def gorsel_hazirla(yol):
 def inversion_kontrol(test_list):
 
     s = [x for x in test_list if x != 0]
-    count = sum(1 for i in range(len(s)) for j in range(i + 1, len(s)) if s[i] > s[j])
+    count = 0
+    for i in range(len(s)):
+        for j in range(i + 1, len(s)):
+            if s[i] > s[j]:
+                count += 1
     return count % 2 == 0
 
 def manhattan(liste):
